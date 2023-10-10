@@ -30,16 +30,17 @@ earth = Material(texture = marsTexture,spec=64,Ks=0.1,matType=REFLECTIVE)
 
  
 #paredes
-raytracer.scene.append(Plane(position=(0,-5,-5),normal=(0,1,0),material=water))
-raytracer.scene.append(Plane(position=(0,5,-5),normal=(0,-1,0),material=grass))
-raytracer.scene.append(Plane(position=(0,0,-10),normal=(0,0,1),material=brick))
-raytracer.scene.append(Plane(position=(-5,0,-5),normal=(1,0,0),material=water))
+# raytracer.scene.append(Plane(position=(0,-5,-5),normal=(0,1,0),material=water))
+# raytracer.scene.append(Plane(position=(0,5,-5),normal=(0,-1,0),material=grass))
+# raytracer.scene.append(Plane(position=(0,0,-10),normal=(0,0,1),material=brick))
+# raytracer.scene.append(Plane(position=(-5,0,-5),normal=(1,0,0),material=water))
 
 
-#objetos
-raytracer.scene.append(Disk(position=(0,-1.5,-5),normal=(0,1,0),radius=1.5,material=water))
-raytracer.scene.append(AABB(position=(1.5,1.5,-5),size=(1,1,1),material=water))
-raytracer.scene.append(AABB(position=(-1.5,1.5,-5),size=(1,1,1),material=water))
+raytracer.scene.append(OBB(position=(-1.5,1.5,-5),size=(1,1,1),material=brick))
+raytracer.scene.append(OBB(position=(-0.5,1.5,-5),size=(1,1,1),material=brick))
+
+raytracer.scene.append(OBB(position=(-1.5,0,-5),size=(1,1,1),material=water))
+raytracer.scene.append(OBB(position=(-0.5,0,-5),size=(1,1,1),material=water))
 
 
 raytracer.lights.append(AmbientLight(intensity=0.1))

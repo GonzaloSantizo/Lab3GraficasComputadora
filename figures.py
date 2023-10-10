@@ -113,6 +113,7 @@ class AABB(Shape):
         topPlane=Plane(np.add(self.position,(0,size[1]/2,0)),(0,1,0),material)
         backPlane=Plane(np.add(self.position,(0,0,-size[2]/2)),(0,0,-1),material)
         frontPlane=Plane(np.add(self.position,(0,0,size[2]/2)),(0,0,1),material)
+
         self.planes.append(leftPlane)
         self.planes.append(rightPlane)
         self.planes.append(bottomPlane)
@@ -126,6 +127,48 @@ class AABB(Shape):
         for i in range(3):
             self.boundsMin[i]=self.position[i]-(bias+size[i]/2)
             self.boundsMax[i]=self.position[i]+(bias+size[i]/2)
+
+
+
+class OBB(Shape):
+    def __init__(self, position,size, material):
+       # self.size=size
+        super().__init__(position,material)
+        self.planes=[]
+        self.size=size
+       # self.lenghts=[0,0,0]
+       # self.lengthX=size[0]
+       # self.lengthY=size[1]
+       # self.lengthZ=size[2]
+        #Sides
+        leftPlane=Plane(np.add(self.position,(-size[0]/2,0,0)),(-1,0,0),material)
+        rightPlane=Plane(np.add(self.position,(size[0]/2,0,0)),(1,0,0),material)
+        bottomPlane=Plane(np.add(self.position,(0,-size[1],0,)),(0,-1,0),material)
+        topPlane=Plane(np.add(self.position,(0,size[1]/2,0)),(0,1,0),material)
+        backPlane=Plane(np.add(self.position,(0,0,-size[2]/2)),(0,0,-1),material)
+        frontPlane=Plane(np.add(self.position,(0,0,size[2]/2)),(0,0,1),material)
+
+
+
+
+        self.planes.append(leftPlane)
+        self.planes.append(rightPlane)
+        self.planes.append(bottomPlane)
+        self.planes.append(topPlane)
+        self.planes.append(backPlane)
+        self.planes.append(frontPlane)
+
+        #Bounds
+        self.boundsMin=[0,0,0]
+        self.boundsMax=[0,0,0]
+        bias=0.001
+        for i in range(3):
+            self.boundsMin[i]=self.position[i]-(bias+size[i]/2)
+            self.boundsMax[i]=self.position[i]+(bias+size[i]/2)
+
+
+
+
     def ray_intersect(self, orig, dir):
         intersect=None
         t=float("inf")
@@ -161,4 +204,7 @@ class AABB(Shape):
                         normal=intersect.normal,
                         texcoords=(u,v),
                         obj=self)
+
+
+
 
